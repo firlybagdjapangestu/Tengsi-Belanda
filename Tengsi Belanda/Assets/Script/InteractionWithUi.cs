@@ -1,43 +1,75 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 
 public class InteractionWithUi : MonoBehaviour
 {
     [SerializeField] private float timeToSelect;
-    [SerializeField] private float timer;
-    [SerializeField] private bool lookAt;
-    [SerializeField] private GameObject buttonPlay;
+    [SerializeField] private int sceneToLoad;
+    [SerializeField] private int typePointerDown;
+    private bool isPointerOver;
 
-    void Update()
+    private void Start()
     {
-        if (lookAt)
+        isPointerOver = false;
+    }
+
+    private void Update()
+    {
+        if (isPointerOver)
         {
-            timer += Time.deltaTime; // menghitung waktu
-            if(timer >= timeToSelect) // membandingkan dengan batas waktu memilih
+            timeToSelect -= Time.deltaTime;
+            if (timeToSelect <= 0)
             {
-                Debug.Log("Select"); // akan melaksanakan pointer down 
-                ExecuteEvents.Execute(buttonPlay, new PointerEventData(EventSystem.current), ExecuteEvents.pointerDownHandler);
-                timer = 0;
+                Debug.Log("Select");
+                PointerDown(typePointerDown);
+                timeToSelect = 0;
             }
         }
-        
     }
 
-    public void PointerEnter() // mendeteksi pointer lagi berada di ui(Button)
+    public void PointerEnter()
     {
-        lookAt = true;
+        isPointerOver = true;
         Debug.Log("Masuk");
     }
-    public void PointerExit() // Mendeteksi Pointer lagi tidak berada di ui(Button)
+
+    public void PointerExit()
     {
-        lookAt = false;
+        isPointerOver = false;
         Debug.Log("Keluar");
     }
-    public void LoadScane(int i)// untuk meload scene
+
+    public void PointerDown(int _typePointerDown)
     {
-        SceneManager.LoadScene(i);
+        if (_typePointerDown == 0)
+        {
+            LoadScene(sceneToLoad);
+        }
+        else if (_typePointerDown == 1)
+        {
+            QuitApplication();
+            // Do something else
+        }
+    }
+
+    public void SetSceneToLoad(int _selectScene)
+    {
+        sceneToLoad = _selectScene;
+    }
+
+    public void SetPointerType(int _typePointerDown)
+    {
+        typePointerDown = _typePointerDown;
+    }
+
+    private void LoadScene(int _sceneToLoad)
+    {
+        SceneManager.LoadScene(_sceneToLoad);
+    }
+    private void QuitApplication()
+    {
+        Debug.Log("Keluar dari aplikasi");
+        Application.Quit(); // Panggil method Quit() untuk keluar dari aplikasi
     }
 }

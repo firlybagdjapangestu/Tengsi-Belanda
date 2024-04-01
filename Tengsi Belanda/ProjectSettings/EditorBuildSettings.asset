@@ -6,9 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/MainMenu.unity
-    guid: e813a4e033b366c4ab2e2a730a8e8bad
+    path: Assets/Scenes/NewMainMenu.unity
+    guid: 0fc523bf6a271b14b83c0f523d1e5d07
   - enabled: 1
-    path: Assets/Scenes/Gameplay.unity
-    guid: 9fc0d4010bbf28b4594072e72b8655ab
+    path: Assets/Scenes/TengsiBelanda.unity
+    guid: d2926f8b4e626594e99334ab5a506414
   m_configObjects: {}
