@@ -8,6 +8,9 @@ TagManager:
   - Building
   - Bullet
   - Enemy
+  - Environment
+  - Instruction
+  - Exit
   layers:
   - Default
   - TransparentFX
@@ -18,8 +21,8 @@ TagManager:
   - 
   - 
   - City
-  - 
-  - 
+  - Environment
+  - Player Minimap
   - 
   - 
   - 

@@ -45,7 +45,7 @@ public class GvrEditorEmulator : MonoBehaviour
     private static bool instanceSearchedFor = false;
 
     // Allocate an initial capacity; this will be resized if needed.
-    private static Camera[] allCameras = new Camera[32];
+    public static Camera[] allCameras = new Camera[1];
 
     // Use mouse to emulate head in the editor.
     // These variables must be static so that head pose is maintained between scene changes,
