@@ -5,15 +5,15 @@ using UnityEngine;
 public class GamepadControllerFor3DSpace : MonoBehaviour
 {
     public float speed = 5f; // Kecepatan pergerakan
+    public float gravity = 9.81f; // Besar gravitasi
     private CharacterController controller;
     [SerializeField] private Transform mainCamera;
     [SerializeField] private Animator charAnimation;
 
-
     void Start()
     {
         controller = GetComponent<CharacterController>();
-        mainCamera = Camera.main.transform;  
+        mainCamera = Camera.main.transform;
     }
 
     void Update()
@@ -39,9 +39,19 @@ public class GamepadControllerFor3DSpace : MonoBehaviour
         // Menghadapkan karakter ke arah hadap kamera
         Vector3 moveDirection = Quaternion.Euler(0, mainCamera.eulerAngles.y, 0) * movement;
 
-        // Menggerakkan objek menggunakan CharacterController
+        // Menggerakkan objek menggunakan CharacterController dengan gravitasi
+        if (controller.isGrounded)
+        {
+            // Reset kecepatan vertikal jika sudah menyentuh tanah
+            moveDirection.y = 0f;
+        }
+        else
+        {
+            // Terapkan gaya gravitasi ke kecepatan vertikal
+            moveDirection.y -= gravity * Time.deltaTime;
+        }
+
+        // Menggerakkan karakter
         controller.Move(moveDirection * speed * Time.deltaTime);
     }
-
-    
 }

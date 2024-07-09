@@ -24,21 +24,33 @@ public class InstructionController : MonoBehaviour
         // Memeriksa jika Fire1 ditekan
         if (Input.GetButtonDown("Fire1"))
         {
-            // Memulai AudioClip
-            if (audioSource != null && audioNow != null)
-            {
-                audioSource.clip = audioNow;
-                audioSource.Play();
-            }
             if (exit)
             {
                 Debug.Log("Keluar");
                 Application.Quit(); // Panggil method Quit() untuk keluar dari aplikasi
             }
+            // Memulai AudioClip
+            if (audioSource != null && audioNow != null)
+            {
+                audioSource.clip = audioNow;
+                if (audioSource.isPlaying)
+                {
+                    // Menghentikan audio jika sedang diputar
+                    audioSource.Stop();
+                    audioNow = null;
+                }
+                else
+                {
+                    // Memulai audio jika sedang tidak diputar
+                    audioSource.Play();
+                }
+            }
+            
         }
     }
 
-    private void OnTriggerEnter(Collider other)
+
+    private void OnTriggerStay(Collider other)
     {
         IntructionData intructionData = other.GetComponent<IntructionData>();
         if (other.tag == "Instruction") // Memeriksa tag dari collider yang bersentuhan
@@ -55,13 +67,12 @@ public class InstructionController : MonoBehaviour
         }
     }
 
+
     private void OnTriggerExit(Collider other)
     {
         if (other.tag == "Instruction") // Memeriksa tag dari collider yang bersentuhan
         {
-            instructionImage.SetActive(false);
-            audioNow = null;
-            audioSource.Stop();        
+            instructionImage.SetActive(false);     
         }
         if (other.tag == "Exit") // Memeriksa tag dari collider yang bersentuhan
         {
