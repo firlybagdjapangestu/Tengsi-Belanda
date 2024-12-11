@@ -11,11 +11,26 @@ public class InstructionController : MonoBehaviour
     [SerializeField] private AudioClip audioNow;
     [SerializeField] private TextMeshProUGUI textPenjelasanButton;
     [SerializeField] private bool exit;
+    [SerializeField] private PlayerController playerController;
+    [SerializeField] private bool playerControllerActivated;
+    private bool audioIsPlaying;
 
     // Start is called before the first frame update
     void Start()
     {
-        instructionImage.SetActive(false); // Pastikan gambar instruksi tidak aktif saat memulai
+        audioIsPlaying = false;
+        CheckController();
+        if(playerControllerActivated)
+        {
+            instructionImage.SetActive(true);
+            textPenjelasanButton.text = "Anda Tidak Terhubung Controller Untuk Berjalan Tundukan Pandangan Anda";
+
+        }
+        else
+        {
+            instructionImage.SetActive(false); // Pastikan gambar instruksi tidak aktif saat memulai
+        }
+        
     }
 
     // Update is called once per frame
@@ -44,9 +59,9 @@ public class InstructionController : MonoBehaviour
                     // Memulai audio jika sedang tidak diputar
                     audioSource.Play();
                 }
-            }
-            
+            } 
         }
+
     }
 
 
@@ -78,6 +93,32 @@ public class InstructionController : MonoBehaviour
         {
             instructionImage.SetActive(false);
             exit = false;
+        }
+    }
+
+    private void CheckController()
+    {
+        // Retrieve a list of all connected joystick names
+        string[] connectedControllers = Input.GetJoystickNames();
+
+        // Check if there are any connected controllers
+        if (connectedControllers.Length > 0)
+        {
+            foreach (string controller in connectedControllers)
+            {
+                if (!string.IsNullOrEmpty(controller))
+                {
+                    playerController.enabled = false;
+                    playerControllerActivated = false;
+                    Debug.Log("Controller connected: " + controller);
+                }
+            }
+        }
+        else
+        {
+            playerControllerActivated = true;
+            playerController.enabled = true;
+            Debug.Log("No controller connected.");
         }
     }
 }

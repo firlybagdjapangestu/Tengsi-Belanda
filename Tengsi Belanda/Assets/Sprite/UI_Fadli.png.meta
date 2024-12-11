@@ -36,7 +36,7 @@ TextureImporter:
       213: 3993694553574133547
     second: UI_Fadli_10
   externalObjects: {}
-  serializedVersion: 11
+  serializedVersion: 12
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
@@ -56,6 +56,8 @@ TextureImporter:
   isReadable: 0
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMasterTextureLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -87,10 +89,14 @@ TextureImporter:
   textureType: 8
   textureShape: 1
   singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
   maxTextureSizeSet: 0
   compressionQualitySet: 0
   textureFormatSet: 0
+  ignorePngGamma: 0
   applyGammaDecoding: 0
+  cookieLightType: 1
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
@@ -420,6 +426,18 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
+    nameFileIdTable:
+      UI_Fadli_0: -6903828394901490294
+      UI_Fadli_1: 8427945925150642292
+      UI_Fadli_10: 3993694553574133547
+      UI_Fadli_2: -114246178888050496
+      UI_Fadli_3: -1783333044173349192
+      UI_Fadli_4: 3783328652466585899
+      UI_Fadli_5: 3332344086797400144
+      UI_Fadli_6: -7521446501186669224
+      UI_Fadli_7: -4440647233065571048
+      UI_Fadli_8: 2035388529844233560
+      UI_Fadli_9: -1532692061211773323
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
